@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 import model.entities.Reservation;
 
-public class Program_solucao_ruim {
+public class Program {
 
 	public static void main(String[] args) {
 		
