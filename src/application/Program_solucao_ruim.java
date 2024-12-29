@@ -19,16 +19,14 @@ public class Program_solucao_ruim {
         System.out.print("Check-out date (dd/MM/yyyy): ");
         LocalDate checkOut = LocalDate.parse(sc.next(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 
-        // Verificação ANTES de criar o objeto
+        
         if (!checkOut.isAfter(checkIn)) {
-            // Mensagem de erro e finaliza o fluxo se as datas forem inválidas
             System.out.println("Error in reservation: Check-out date must be after check-in date");
         } else {
-            // Criação do objeto Reservation SOMENTE se as datas forem válidas
             Reservation reservation = new Reservation(roomNumber, checkIn, checkOut);
             System.out.println("Reservation: " + reservation);
 
-            // Atualização de datas
+          
             System.out.println();
             System.out.println("Enter data to update the reservation:");
             System.out.print("Check-in date (dd/MM/yyyy): ");
@@ -36,19 +34,13 @@ public class Program_solucao_ruim {
             System.out.print("Check-out date (dd/MM/yyyy): ");
             checkOut = LocalDate.parse(sc.next(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 
-            LocalDate now = LocalDate.now();
-
-            // Validação de atualização
-            if (!checkOut.isAfter(checkIn)) {
-                // Primeiro verifica se checkout > checkin
-                System.out.println("Error in reservation: Check-out date must be after check-in date.");
-            } else if (checkIn.isBefore(now) || checkOut.isBefore(now)) {
-                // Depois verifica se as datas são futuras
-                System.out.println("Error in reservation: Reservation dates for update must be future dates.");
-            } else {
-                // Atualização da reserva SOMENTE se as novas datas forem válidas
-                reservation.UpdateDates(checkIn, checkOut);
-                System.out.println("Reservation: " + reservation);
+           
+            String error = reservation.UpdateDates(checkIn, checkOut);
+            if (error != null) {
+            	System.out.println("Error in reservation: " + error);
+            }
+            else {
+            	System.out.println("Reservation: " + reservation);
             }
         }
 
